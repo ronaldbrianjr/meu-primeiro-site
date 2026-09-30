@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeraContrato - Gerador de Contratos Gratuito</title>
+    <!-- Conecta o arquivo de estilos que vamos preencher no passo 2 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>GeraContrato</h1>
+        <p>Crie contratos profissionais de prestação de serviços com salvamento automático e sincronização na nuvem.</p>
+    </header>
+
+    <div class="wrapper">
+        <!-- PAINEL DE CONTROLE (ESQUERDA) -->
+        <div class="box-inputs">
+            <!-- Espaço reservado para os banners do Google AdSense gerarem renda -->
+            <div class="adsense-placeholder">Espaço do Anúncio (Google AdSense)</div>
+            
+            <div class="form-group">
+                <label for="contratante">Nome do Cliente (Contratante)</label>
+                <input type="text" id="contratante" placeholder="Ex: Rogério Marques" oninput="atualizarContrato(); capturarEProcessarDados();">
+            </div>
+            
+            <div class="form-group">
+                <label for="contrated">Seu Nome ou Empresa (Contratado)</label>
+                <input type="text" id="contrated" placeholder="Ex: DevTech Soluções" oninput="atualizarContrato(); capturarEProcessarDados();">
+            </div>
+            
+            <div class="form-group">
+                <label for="servico">Descrição do Serviço Técnico</label>
+                <textarea id="servico" rows="4" placeholder="Ex: Criação de um site institucional moderno..." oninput="atualizarContrato(); capturarEProcessarDados();"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="valor">Valor Total do Serviço (R$)</label>
+                <input type="text" id="valor" placeholder="Ex: 2.500,00" oninput="atualizarContrato(); capturarEProcessarDados();">
+            </div>
+
+            <!-- Botão que dispara a função do app.js para salvar no Supabase e abrir a impressão -->
+<button class="btn-print" onclick="enviarParaOSupabase()">Imprimir e Salvar PDF</button>
+        </div>
+
+        <!-- PAINEL DE PREVIEW (DIREITA) -->
+        <div class="box-preview">
+            <div class="contract-text" id="previewText">
+                <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; color: #1e293b;">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</h3>
+                <p>Pelo presente instrumento particular, de um lado denominado <strong>CONTRATANTE:</strong> <span id="lblContratante" style="color:#4f46e5; font-weight:bold;">[Nome do Cliente]</span>, e de outro lado denominado <strong>CONTRATADO:</strong> <span id="lblContratado" style="color:#4f46e5; font-weight:bold;">[Sua Empresa]</span>, firmam o presente acordo:</p>
+                <br>
+                <p><strong>Cláusula 1ª - Objeto:</strong> O CONTRATADO se compromete a realizar o seguinte serviço: <span id="lblServico" style="color:#1e293b;">[Descrição do serviço]</span>.</p>
+                <br>
+                <p><strong>Cláusula 2ª - Preço:</strong> Pelo trabalho executado, o CONTRATANTE pagará a quantia acordada de R$ <span id="lblValor" style="color:#1e293b;">0,00</span>.</p>
+                <br>
+                <p>As partes elegem o foro local para dirimir quaisquer dúvidas contratuais.</p>
+                <br><br>
+                <p style="text-align: center;">_______________________________________<br>Assinatura do Contratante</p>
+                <br><br>
+                <p style="text-align: center;">_______________________________________<br>Assinatura do Contratado</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de atualização visual rápida -->
+    <script>
+        function atualizarContrato() {
+            document.getElementById('lblContratante').innerText = document.getElementById('contratante').value || '[Nome do Cliente]';
+            document.getElementById('lblContratado').innerText = document.getElementById('contrated').value || '[Sua Empresa]';
+            document.getElementById('lblServico').innerText = document.getElementById('servico').value || '[Descrição do serviço]';
+            document.getElementById('lblValor').innerText = document.getElementById('valor').value || '0,00';
+        }
+    </script>
+    
+    <!-- Conecta com o arquivo de inteligência app.js que configuramos com as chaves do Supabase -->
+    <script src="./app.js"></script>
+
+        <!-- RODAPÉ EXIGIDO PELO GOOGLE ADSENSE -->
+    <footer style="text-align: center; padding: 40px 20px; margin-top: 50px; border-top: 1px solid #334155; color: #64748b; font-size: 13px;">
+        <p>&copy; 2026 GeraContrato. Todos os direitos reservados.</p>
+        <p style="margin-top: 10px;">
+            <a href="privacidade.html" style="color: #38bdf8; text-decoration: none; margin: 0 10px;">Política de Privacidade</a> | 
+            <a href="termos.html" style="color: #818cf8; text-decoration: none; margin: 0 10px;">Termos de Uso</a>
+        </p>
+    </footer>
+
+</body>
+</html>
