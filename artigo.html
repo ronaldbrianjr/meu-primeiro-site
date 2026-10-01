@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Artigo | InfoMaçonaria</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Space+Grotesk:wght@600;700;800&display=swap');
+		body { font-family: 'Space Grotesk', sans-serif; background-color: #0b021a; background-image: radial-gradient(#1c093a 1.5px, transparent 1.5px); background-size: 24px 24px; color: #000; }
+		.font-comic { font-family: 'Montserrat', sans-serif; font-style: italic; font-weight: 900; }
+		.logo-info { color: #ffea00; -webkit-text-stroke: 2px #000; text-shadow: 4px 4px 0 #000; }
+		.logo-maconaria { color: #fff; -webkit-text-stroke: 2px #000; text-shadow: 4px 4px 0 #000; }
+		.card-neo { border: 4px solid #000; box-shadow: 7px 7px 0 #000; }
+		.btn-neo { border: 3px solid #000; box-shadow: 4px 4px 0 #000; transition: all .15s ease-in-out; display: inline-flex; align-items: center; justify-content: center; }
+		.btn-neo:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #000; }
+		.article-body p { margin-bottom: 1.25rem; line-height: 1.8; }
+		h1, h2, h3, .article-body { overflow-wrap: anywhere; }
+		@media (max-width: 640px) {
+			.btn-neo { min-height: 44px; }
+			main { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+			#article { padding: 1.25rem; }
+			#article h1 { font-size: 1.5rem; line-height: 1.1; }
+			header { padding: .5rem .75rem; }
+			header .max-w-5xl { gap: .5rem; }
+			header .max-w-5xl > a:first-child { width: 100%; text-align: center; }
+			header nav { width: 100%; justify-content: center; }
+			header .btn-neo { min-height: 40px; padding: .5rem .75rem; }
+			#voltar { min-height: 44px; align-items: center; }
+		}
+	</style>
+</head>
+<body>
+	<header class="bg-[#0038ff] border-b-4 border-black px-4 py-3 sticky top-0 z-10">
+		<div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center gap-4">
+			<a href="index.html" class="font-comic text-3xl md:text-4xl tracking-tighter leading-none"><span class="logo-info">INFO</span><span class="logo-maconaria">MAÇONARIA</span></a>
+			<nav class="flex flex-wrap gap-3"><a href="brasil.html" class="btn-neo bg-[#ff1744] text-white font-black px-4 py-2 rounded-xl text-xs uppercase">Brasil <img src="flag-brazil_1f1e7-1f1f7.png" alt="Brasil" class="h-4 w-4 object-contain ml-1 inline-block align-middle"></a><a href="mundo.html" class="btn-neo bg-[#7928ca] text-white font-black px-4 py-2 rounded-xl text-xs uppercase">Mundo 🌍</a></nav>
+		</div>
+	</header>
+	<main class="max-w-4xl mx-auto px-4 py-8">
+		<a id="voltar" href="index.html" class="inline-flex text-yellow-300 font-black text-sm uppercase mb-5 hover:underline">← Voltar às notícias</a>
+		<article id="article" class="card-neo bg-white rounded-3xl p-6 md:p-10"></article>
+	</main>
+	<script>
+		const noticias = {
+			destaque: ['Destaque nacional', '24 de agosto de 2025', 'Potências Regulares Firmam Acordo Cívico Para Ações Comunitárias', 'Iniciativa reforça o papel da Maçonaria na sociedade brasileira e amplia o alcance de projetos sociais e de reforço escolar.', ['As principais potências regulares brasileiras firmaram um acordo de cooperação para ampliar ações comunitárias em diferentes regiões do país.', 'A iniciativa prevê a criação de frentes conjuntas para reforço escolar, apoio a famílias em situação de vulnerabilidade e incentivo à participação cívica.', 'O objetivo é transformar projetos locais em uma rede contínua de atendimento, com acompanhamento dos resultados e prestação de contas à comunidade.']],
+			'brasil-gob': ['GOB • Nacional', '28 de setembro de 2026', 'Grande Oriente do Brasil Celebra Assembleia de Integração Cívica', 'O Grão-Mestrado Geral reuniu delegações de todos os estados no Palácio Jair Assis Ribeiro em Brasília para apresentar novas diretrizes filantrópicas para 2027.', ['Delegações de todos os estados participaram da Assembleia de Integração Cívica realizada em Brasília. O encontro reuniu lideranças para avaliar projetos em andamento e definir prioridades para o próximo ciclo.', 'Entre as diretrizes apresentadas estão a ampliação de programas de educação, a aproximação com entidades comunitárias e a organização de indicadores para acompanhar o impacto das ações filantrópicas.', 'A programação também incluiu grupos de trabalho voltados à troca de experiências entre as lojas e à construção de calendários regionais de atendimento.']],
+			'brasil-cmsb': ['CMSB • Confederação', '25 de setembro de 2026', 'Grandes Lojas Definem Calendário da Conferência Nacional de Mestres', 'A Confederação da Maçonaria Simbólica do Brasil oficializou os tópicos de ética pública e responsabilidade social que pautarão o encontro anual.', ['A Confederação da Maçonaria Simbólica do Brasil oficializou o calendário da próxima Conferência Nacional de Mestres. A agenda foi construída com participação das Grandes Lojas.', 'Os painéis vão discutir projetos de impacto local, formação de lideranças e formas de fortalecer a cooperação entre instituições maçônicas e organizações da sociedade civil.', 'A programação completa e as orientações para as delegações serão divulgadas pelos canais oficiais da entidade.']],
+			'brasil-comab': ['COMAB • Autônomos', '22 de setembro de 2026', 'Grandes Orientes Autônomos Concluem Encontro da Região Centro-Sul', 'Resoluções com foco no amparo à juventude e intercâmbio de arquivos históricos foram ratificadas pelas potências confederadas.', ['O encontro regional das potências confederadas foi encerrado com a aprovação de resoluções voltadas ao amparo à juventude e à preservação da memória institucional.', 'As entidades participantes também aprovaram um calendário de intercâmbio de arquivos históricos, com orientações para digitalização, catalogação e acesso de pesquisadores.', 'A agenda deverá ser acompanhada por comissões regionais, que apresentarão os primeiros resultados nas próximas reuniões da confederação.']],
+			'brasil-sp': ['SP • GOB-SP / GLESP', '20 de setembro de 2026', 'Palácio Maçónico de São Paulo Inaugura Acervo Cultural Digital', 'Documentos raros sobre o papel dos maçons paulistas em 1822 foram digitalizados e estão disponíveis para consulta aberta de estudantes e pesquisadores.', ['O Palácio Maçónico de São Paulo inaugurou um acervo cultural digital com documentos históricos relacionados à atuação de maçons paulistas no período da Independência.', 'A primeira coleção reúne atas, correspondências e registros iconográficos que passaram por tratamento técnico antes da publicação.', 'A iniciativa também prevê novas etapas de digitalização e encontros para apresentar os documentos ao público.']],
+			'brasil-rj': ['RJ • GOB-RJ / GLMERJ', '18 de setembro de 2026', 'Templo Histórico do Lavradio Promove Circuito de Visitas Monitoradas', 'Monumento do Centro Histórico carioca abre as portas para visitas guiadas, detalhando a arquitetura neoclássica e fatos cívicos da fundação da República.', ['O Templo Histórico do Lavradio passou a receber um circuito de visitas monitoradas no Centro Histórico do Rio de Janeiro.', 'Os visitantes percorrem áreas selecionadas acompanhados por monitores, que contextualizam elementos neoclássicos, documentos e símbolos presentes no espaço.', 'As inscrições e os horários das próximas visitas são divulgados pelas entidades responsáveis pela programação.']],
+			'brasil-mg': ['MG • GOB-MG / GLMMG / GOMG', '15 de setembro de 2026', 'Potências Mineiras Unificam Campanha Estadual de Filantropia', 'As três obediências de Minas Gerais lançaram ação integrada de entrega de materiais escolares e reformas em abrigos de Belo Horizonte e Triângulo Mineiro.', ['As três obediências mineiras lançaram uma campanha estadual de filantropia com ações coordenadas em Belo Horizonte e no Triângulo Mineiro.', 'A primeira fase contempla a entrega de materiais escolares e reformas em abrigos. Lojas participantes organizaram equipes para identificar necessidades e acompanhar as melhorias.', 'A campanha continuará ao longo do semestre e poderá receber novas adesões de lojas, empresas parceiras e voluntários.']],
+			'brasil-rs': ['RS • GOB-RS / GORGS', '12 de setembro de 2026', 'Comitê de Solidariedade no RS Conclui Nova Fase de Apoio Comunitário', 'Lojas do Rio Grande do Sul coordenam entregas estruturais e apoiam famílias com suporte financeiro e reabilitação de comércios comunitários locais.', ['O Comitê de Solidariedade no Rio Grande do Sul concluiu uma nova fase de apoio a famílias e pequenos comércios afetados por dificuldades econômicas.', 'As ações combinaram entregas de itens estruturais, suporte financeiro emergencial e auxílio para a reabilitação de atividades comerciais comunitárias.', 'As lojas envolvidas consolidam os resultados e definem quais municípios serão atendidos na próxima etapa.']],
+			'mundo-ugle': ['UGLE • Reino Unido', '26 de setembro de 2026', "Museu Maçónico do Freemasons' Hall em Londres Digitaliza Livro de Constituições de 1723", 'A Grande Loja Unida da Inglaterra anunciou a liberação pública online de atas fundamentais e manuscritos raros, permitindo que historiadores mundiais pesquisem a evolução dos Landmarks sem restrições institucionais.', ['O Museu Maçónico do Freemasons’ Hall, em Londres, iniciou uma nova etapa de preservação digital de seu acervo histórico, com destaque para o Livro de Constituições de 1723.', 'A disponibilização online amplia o acesso de pesquisadores a atas, manuscritos e registros que ajudam a compreender a formação das tradições maçônicas britânicas.', 'A iniciativa faz parte de um programa de preservação que deverá incluir outras coleções raras ao longo dos próximos ciclos de digitalização.']],
+			'mundo-cmi': ['CMI • América Latina', '24 de setembro de 2026', 'Confederação Maçónica Interamericana Fortalece Cooperação em Encontro Regional', 'Reunindo mais de 80 potências da América Latina e do Caribe, a CMI estabeleceu protocolos conjuntos para ajuda mútua em desastres naturais e programas de bolsas educacionais continentais.', ['Representantes da Confederação Maçónica Interamericana reuniram-se para fortalecer mecanismos de cooperação entre potências da América Latina e do Caribe.', 'O encontro resultou em protocolos para ajuda mútua em situações de desastre e em propostas de bolsas educacionais com alcance continental.', 'As entidades participantes deverão acompanhar a execução das medidas e preparar a próxima rodada de reuniões.']],
+			'mundo-scot': ['Escócia', '19 de setembro de 2026', 'Grande Loja da Escócia Celebra Preservação de Templos Bicentenários', 'Obras de manutenção estrutural em Edimburgo uniram técnicas artesanais de cantaria em pedra com certificações modernas de sustentabilidade.', ['A Grande Loja da Escócia apresentou uma etapa do programa de preservação de templos bicentenários em Edimburgo, conciliando técnicas tradicionais com padrões atuais de sustentabilidade.', 'As obras incluíram manutenção estrutural, recuperação de elementos arquitetônicos e adequações para reduzir o impacto ambiental dos edifícios.', 'O programa também prevê ações educativas para transmitir conhecimentos de conservação a novas gerações.']],
+			'mundo-legado': ['Mundo', '20 de agosto de 2025', 'Fraternidade e União: O Legado Histórico Internacional', 'Convenções europeias reforçam a partilha de fundos solidários transfronteiriços para assistência humanitária.', ['Convenções europeias recentes reforçaram a cooperação internacional e a partilha de fundos solidários para assistência humanitária.', 'As propostas apresentadas buscam facilitar respostas coordenadas em situações de emergência, respeitando as particularidades das organizações participantes.', 'O debate também recuperou episódios históricos de colaboração entre instituições de diferentes países e apontou caminhos para novos projetos conjuntos.']]
+		};
+		const originais = {
+			'mundo-ugle': {
+				idioma: 'English',
+				titulo: 'Freemasons\' Hall Museum in London Digitizes the 1723 Book of Constitutions',
+				resumo: 'The United Grand Lodge of England announced the public online release of foundational minutes and rare manuscripts, allowing researchers worldwide to study the development of the Landmarks without institutional restrictions.',
+				paragrafos: ['The Freemasons\' Hall Museum in London has begun a new stage of digital preservation for its historical collection, highlighting the 1723 Book of Constitutions.', 'Online access expands researchers\' ability to study minutes, manuscripts, and records that help explain the formation and development of British Masonic traditions.', 'The initiative is part of a preservation program expected to include other rare collections in future digitization cycles.']
+			},
+			'mundo-cmi': {
+				idioma: 'Español',
+				titulo: 'La Confederación Masónica Interamericana Fortalece la Cooperación en un Encuentro Regional',
+				resumo: 'Reuniendo a más de 80 potencias de América Latina y el Caribe, la CMI estableció protocolos conjuntos de ayuda mutua ante desastres naturales y programas continentales de becas educativas.',
+				paragrafos: ['Representantes de la Confederación Masónica Interamericana se reunieron para fortalecer los mecanismos de cooperación entre las potencias de América Latina y el Caribe.', 'El encuentro dio lugar a protocolos de ayuda mutua ante desastres y a propuestas de becas educativas de alcance continental.', 'Las entidades participantes deberán acompañar la ejecución de las medidas y preparar la próxima ronda de reuniones.']
+			},
+			'mundo-scot': {
+				idioma: 'English',
+				titulo: 'Grand Lodge of Scotland Celebrates the Preservation of Bicentennial Temples',
+				resumo: 'Structural maintenance works in Edinburgh combined traditional stone masonry techniques with modern sustainability certifications.',
+				paragrafos: ['The Grand Lodge of Scotland presented a stage of its program to preserve bicentennial temples in Edinburgh, combining traditional techniques with current sustainability standards.', 'The works included structural maintenance, restoration of architectural elements, and adaptations to reduce the environmental impact of the buildings.', 'The program also includes educational activities to pass conservation knowledge on to new generations.']
+			},
+			'mundo-legado': {
+				idioma: 'English',
+				titulo: 'Fraternity and Unity: The International Historical Legacy',
+				resumo: 'European conventions are strengthening the sharing of cross-border solidarity funds for humanitarian assistance.',
+				paragrafos: ['Recent European conventions have strengthened international cooperation and the sharing of solidarity funds for humanitarian assistance.', 'The proposals seek to facilitate coordinated responses in emergency situations while respecting the particularities of the participating organizations.', 'The discussion also revisited historical examples of cooperation between institutions from different countries and identified paths for new joint projects.']
+			}
+		};
+		const id = new URLSearchParams(window.location.search).get('id') || 'destaque';
+		const noticia = noticias[id] || noticias.destaque;
+		const origemMundo = id.startsWith('mundo-');
+		const caminho = origemMundo ? 'mundo.html' : 'brasil.html';
+		let modoIdioma = 'pt';
+		document.title = `${noticia[2]} | InfoMaçonaria`;
+		document.getElementById('voltar').href = caminho;
+
+		function renderizarArtigo() {
+			const original = modoIdioma === 'original' && originais[id];
+			const conteudo = original || { titulo: noticia[2], resumo: noticia[3], paragrafos: noticia[4] };
+			const controleIdioma = originais[id] ? `<button id="alternar-idioma" type="button" class="btn-neo bg-yellow-400 text-black font-black px-4 py-2 rounded-xl text-xs uppercase" aria-pressed="${modoIdioma === 'original'}">🌐 Ler em ${original ? 'Português' : originais[id].idioma}</button><span class="text-xs font-black text-gray-500 uppercase">Versão: ${original ? originais[id].idioma : 'Português'}</span>` : '';
+			document.title = `${conteudo.titulo} | InfoMaçonaria`;
+			document.getElementById('article').innerHTML = `<span class="inline-block bg-[#ff1744] text-white font-black text-xs uppercase px-3 py-1 rounded-lg border-2 border-black">${noticia[0]}</span><h1 class="font-comic text-3xl md:text-5xl uppercase leading-tight mt-4">${conteudo.titulo}</h1><div class="flex flex-wrap gap-4 text-xs font-black text-gray-500 border-b-4 border-black/10 py-4 mb-6"><span>📅 ${noticia[1]}</span><span>📰 InfoMaçonaria</span></div>${originais[id] ? `<div class="flex flex-wrap items-center gap-3 mb-6">${controleIdioma}</div>` : ''}<p class="bg-yellow-300 border-l-8 border-black rounded-xl p-4 md:p-5 font-black text-base md:text-lg leading-relaxed">${conteudo.resumo}</p><div class="article-body text-gray-800 text-base md:text-lg mt-7">${conteudo.paragrafos.map(paragrafo => `<p>${paragrafo}</p>`).join('')}</div><div class="border-t-4 border-black/10 pt-5 mt-8 flex flex-wrap gap-3"><a href="${caminho}" class="btn-neo bg-black text-white font-black px-4 py-2 rounded-xl text-xs uppercase">← Mais notícias</a><a href="index.html" class="btn-neo bg-yellow-400 text-black font-black px-4 py-2 rounded-xl text-xs uppercase">Página inicial</a></div>`;
+			const botaoIdioma = document.getElementById('alternar-idioma');
+			if (botaoIdioma) botaoIdioma.addEventListener('click', () => { modoIdioma = modoIdioma === 'pt' ? 'original' : 'pt'; renderizarArtigo(); });
+		}
+		renderizarArtigo();
+	</script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo | InfoMaçonaria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Space+Grotesk:wght@600;700;800&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #0b021a;
+            background-image: radial-gradient(#1c093a 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            min-height: 100vh;
+            color: #000;
+        }
+
+        .font-comic {
+            font-family: 'Montserrat', sans-serif;
+            font-style: italic;
+            font-weight: 900;
+        }
+
+        .logo-info {
+            color: #ffea00;
+            -webkit-text-stroke: 2px #000;
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        .logo-maconaria {
+            color: #ffffff;
+            -webkit-text-stroke: 2px #000;
+            text-shadow: 4px 4px 0px #000;
+        }
+
+        .card-neo {
+            border: 4px solid #000;
+            box-shadow: 7px 7px 0px #000;
+            position: relative;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .card-neo:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 11px 11px 0px #000;
+        }
+
+        .btn-neo {
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.15s ease-in-out;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-neo:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px #000;
+        }
+        /* Efeito de clique e foco para os botões de imagem */
+        .btn-img-action {
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
+        }
+
+        .btn-img-action:hover {
+            transform: scale(1.08) translateY(-2px);
+            filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.8));
+        }
+
+        .btn-img-action:active {
+            transform: scale(0.96) translateY(2px);
+        }
+
+        .filter-chip {
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.15s ease;
+            cursor: pointer;
+            user-select: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        .filter-chip.active {
+            background-color: #ffea00 !important;
+            color: #000 !important;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-track {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+        }
+        .marquee-wrapper.is-pressing .marquee-track {
+            animation-play-state: paused;
+            cursor: pointer;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .checkerboard {
+            background-image: 
+                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
+                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
+            background-size: 16px 16px;
+            background-position: 0 0, 8px 8px;
+            background-color: #fff;
+        }
+
+        h1, h2, h3, h4 { overflow-wrap: anywhere; }
+        .filter-scroll-shell { display: flex; align-items: center; gap: .5rem; width: 100%; min-width: 0; }
+        .filter-scroll { display: flex; flex: 1; gap: .5rem; min-width: 0; }
+        .filter-scroll-arrow { display: none; flex: 0 0 2.75rem; height: 2.75rem; align-items: center; justify-content: center; border: 3px solid #000; border-radius: .75rem; background: #0038ff; color: #fff; box-shadow: 3px 3px 0 #000; font-size: 1.3rem; font-weight: 900; line-height: 1; touch-action: manipulation; user-select: none; }
+        .filter-scroll-arrow:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
+        @media (max-width: 640px) {
+            .btn-neo, .filter-chip { min-height: 44px; }
+            main { padding-top: 1.25rem; }
+
+            header { padding: .5rem .75rem; }
+            header .max-w-7xl { gap: .5rem; }
+            header .max-w-7xl > a:first-child { width: 100%; justify-content: center; }
+            header .max-w-7xl > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; gap: .4rem; }
+            header .max-w-7xl > div > .btn-neo { min-width: 0; min-height: 44px; padding: .45rem .2rem; font-size: .6rem; }
+            header .max-w-7xl > div > .btn-img-action { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 44px; padding: .15rem; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+            header .max-w-7xl > div > .btn-img-action img { width: 100%; height: auto; max-height: 2.7rem; object-fit: contain; }
+            main.max-w-7xl { padding-left: .75rem; padding-right: .75rem; }
+            main > section.card-neo { padding: 1rem; border-radius: 1.25rem; }
+            main > section.card-neo h1 { font-size: 1.85rem; line-height: 1.08; }
+            .filter-scroll-shell { gap: .35rem; }
+            .filter-scroll { overflow-x: auto; padding: .25rem .15rem .75rem; scrollbar-width: none; scroll-behavior: smooth; }
+            .filter-scroll::-webkit-scrollbar { display: none; }
+            .filter-scroll .filter-chip { flex: 0 0 auto; white-space: nowrap; }
+            .filter-scroll-arrow { display: flex; }
+            #grid-mundo { gap: 1rem; margin-bottom: 2rem; }
+            #grid-mundo article { padding: 1rem; border-radius: 1.25rem; }
+            #grid-mundo article h3 { font-size: 1.2rem; line-height: 1.15; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ticker de Últimas Notícias do Mundo -->
+    <div class="bg-yellow-400 border-b-4 border-black py-2 px-3 flex items-center marquee-wrapper select-none font-bold text-xs md:text-sm">
+        <div class="bg-black text-white px-3.5 py-0.5 mx-2 border-2 border-white rounded transform -skew-x-12 z-20 shrink-0 font-black tracking-widest shadow-[2px_2px_0px_#000]">
+            MUNDO 🌍
+        </div>
+        <div class="marquee-track text-black font-extrabold tracking-wide flex items-center gap-6">
+            <span>🇬🇧 <strong class="text-blue-800">UGLE:</strong> Digitalização de manuscritos do século XVIII em Londres ultrapassa meta anual.</span>
+            <span>•</span>
+            <span>🌎 <strong class="text-purple-800">CMI:</strong> Confederação Interamericana reúne grão-mestrados da América do Sul e Caribe.</span>
+            <span>•</span>
+            <span>🏴󠁧󠁢󠁳󠁣󠁴󠁿 <strong class="text-red-700">Escócia:</strong> Restauro de edifícios maçónicos clássicos em Edimburgo recebe distinção cívica.</span>
+        </div>
+    </div>
+
+    <!-- Cabeçalho Principal -->
+    <header class="bg-[#0038ff] border-b-4 border-black px-4 py-2.5 sticky top-0 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            
+            <a href="index.html" class="flex items-center group">
+                <span class="font-comic text-3xl md:text-4xl lg:text-5xl tracking-tighter leading-none select-none transition-transform group-hover:scale-105">
+                    <span class="logo-info">INFO</span><span class="logo-maconaria">MAÇONARIA</span>
+                </span>
+            </a>
+
+            <!-- Navegação: Aba MUNDO destacada como ativa -->
+            <div class="flex flex-wrap items-center gap-3">
+                
+                </a>
+
+                <a href="brasil.html" class="btn-neo bg-[#ff1744] text-white font-black px-4 py-2 rounded-xl text-sm uppercase tracking-wider hover:bg-black hover:text-white h-11">
+                    BRASIL <img src="flag-brazil_1f1e7-1f1f7.png" alt="Brasil" class="h-4 w-4 object-contain ml-1 inline-block align-middle">
+                </a>
+
+                <!-- Ativo -->
+                <a href="mundo.html" class="btn-neo bg-[#7928ca] text-white font-black px-4 py-2 rounded-xl text-sm uppercase tracking-wider ring-4 ring-yellow-400 h-11 shadow-[6px_6px_0px_#000] flex items-center gap-1.5">
+                    <span>MUNDO</span> <span class="text-base leading-none">🌍</span>
+                </a>
+
+                <!-- Botão Loja (Aponta para a loja no index.html) -->
+                <a href="index.html#loja" class="btn-img-action" title="Acessar Loja InfoMaçonaria">
+                    <img src="loja-btn.png" alt="Loja InfoMaçonaria" class="h-11 md:h-12 w-auto object-contain cursor-pointer drop-shadow-[2px_2px_0px_#000]">
+                </a>
+
+                <!-- Botão Doações (Aponta para doações no index.html) -->
+                <a href="index.html#doacoes" class="btn-img-action" title="Faça sua Doação">
+                    <img src="doacao-btn.png" alt="Faça sua Doação" class="h-11 md:h-12 w-auto object-contain cursor-pointer drop-shadow-[2px_2px_0px_#000]">
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-6">
+
+        <!-- Painel Internacional -->
+        <section class="card-neo bg-[#7928ca] text-white rounded-3xl p-6 md:p-8 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b-4 border-black pb-5">
+                <div>
+                    <span class="bg-yellow-400 text-black font-black px-3 py-1 text-xs uppercase rounded-lg border-2 border-black">
+                        TRADUÇÕES INTEGRADAS
+                    </span>
+                    <h1 class="font-comic text-3xl md:text-5xl uppercase mt-2 leading-none">
+                        Notícias Internacionais Traduzidas
+                    </h1>
+                </div>
+                <div class="bg-sky-300 border-3 border-white rounded-2xl p-3 px-5 text-center shadow-[4px_4px_0px_#ffea00]">
+                    <span class="font-comic text-xl text-blue-950 uppercase">ACESSO ORIGINAL &amp; TRADUÇÃO!</span>
+                </div>
+            </div>
+
+            <!-- Filtros de Região Internacional -->
+            <div>
+                <p class="text-xs font-black uppercase text-purple-200 mb-2">Filtrar por Jurisdição Internacional:</p>
+                <div class="filter-scroll-shell">
+                    <button type="button" class="filter-scroll-arrow" data-filter-arrow="filtros-mundo" data-direction="-1" aria-label="Ver filtros anteriores">‹</button>
+                    <div id="filtros-mundo" class="filter-scroll">
+                    <button onclick="filtrarMundo('todos')" id="btn-mundo-todos" class="filter-chip active bg-white text-black px-4 py-2 rounded-xl">
+                        Todas as Regiões
+                    </button>
+                    <button onclick="filtrarMundo('ugle')" id="btn-mundo-ugle" class="filter-chip bg-white text-black px-4 py-2 rounded-xl">
+                        UGLE (Inglaterra 🇬🇧)
+                    </button>
+                    <button onclick="filtrarMundo('cmi')" id="btn-mundo-cmi" class="filter-chip bg-white text-black px-4 py-2 rounded-xl">
+                        CMI (América Latina 🌎)
+                    </button>
+                    <button onclick="filtrarMundo('europa')" id="btn-mundo-europa" class="filter-chip bg-white text-black px-4 py-2 rounded-xl">
+                        Escócia & Europa 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+                    </button>
+                    </div>
+                    <button type="button" class="filter-scroll-arrow" data-filter-arrow="filtros-mundo" data-direction="1" aria-label="Ver próximos filtros">›</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grade de Notícias Internacionais -->
+        <div id="grid-mundo" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            
+            <!-- Notícia 1: UGLE (Londres) -->
+            <article data-categoria="ugle" data-artigo="artigo.html?id=mundo-ugle" class="card-neo bg-white rounded-3xl p-6 flex flex-col justify-between cursor-pointer" role="link" tabindex="0" aria-label="Abrir matéria completa da UGLE">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-[#0038ff] text-white font-black text-xs px-3 py-1 rounded border-2 border-black uppercase flex items-center gap-1">
+                            UGLE • Reino Unido 🇬🇧
+                        </span>
+                        <span class="text-xs font-bold text-gray-500">26 Set 2026</span>
+                    </div>
+
+                    <h3 class="font-comic text-2xl text-gray-900 uppercase mb-2 leading-tight">
+                        Museu Maçónico do Freemasons' Hall em Londres Digitaliza Livro de Constituições de 1723
+                    </h3>
+
+                    <!-- Bloco Traduzido (Padrão) -->
+                    <div id="trans-ugle" class="bg-blue-50 border-2 border-blue-200 p-3 rounded-xl mb-4 text-xs text-gray-800 font-semibold leading-relaxed">
+                        <span class="text-[10px] font-black text-blue-700 uppercase block mb-1">Versão Traduzida (PT):</span>
+                        A Grande Loja Unida da Inglaterra anunciou a liberação pública online de atas fundamentais e manuscritos raros, permitindo que historiadores mundiais pesquisem a evolução dos Landmarks sem restrições institucionais.
+                    </div>
+
+                    <!-- Bloco Original Alternável -->
+                    <div id="orig-ugle" class="hidden bg-gray-100 border-2 border-gray-400 p-3 rounded-xl mb-4 text-xs text-gray-800 font-mono leading-relaxed">
+                        <span class="text-[10px] font-black text-gray-600 uppercase block mb-1">Original Source (English):</span>
+                        "The United Grand Lodge of England has completed a major milestone in digital preservation at Freemasons' Hall, granting global researchers full public access to 18th-century archives."
+                    </div>
+
+                    <a href="artigo.html?id=mundo-ugle" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase mb-3">Ler matéria completa →</a>
+                </div>
+
+                <div class="pt-4 border-t-2 border-black/10 flex flex-wrap items-center justify-between gap-3">
+                    <button onclick="alternarIdioma('ugle')" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase">
+                        🔄 Alternar para Inglês / Português
+                    </button>
+                    <a href="https://ugle.org.uk" target="_blank" rel="noopener" class="text-xs font-extrabold text-blue-700 hover:underline">
+                        ugle.org.uk ↗
+                    </a>
+                </div>
+            </article>
+
+            <!-- Notícia 2: CMI (América Latina) -->
+            <article data-categoria="cmi" data-artigo="artigo.html?id=mundo-cmi" class="card-neo bg-white rounded-3xl p-6 flex flex-col justify-between cursor-pointer" role="link" tabindex="0" aria-label="Abrir matéria completa da CMI">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-[#7928ca] text-white font-black text-xs px-3 py-1 rounded border-2 border-black uppercase flex items-center gap-1">
+                            CMI • América Latina 🌎
+                        </span>
+                        <span class="text-xs font-bold text-gray-500">24 Set 2026</span>
+                    </div>
+
+                    <h3 class="font-comic text-2xl text-gray-900 uppercase mb-2 leading-tight">
+                        Confederação Maçónica Interamericana Fortalece Cooperação em Encontro Regional
+                    </h3>
+
+                    <div id="trans-cmi" class="bg-purple-50 border-2 border-purple-200 p-3 rounded-xl mb-4 text-xs text-gray-800 font-semibold leading-relaxed">
+                        <span class="text-[10px] font-black text-purple-700 uppercase block mb-1">Versão Traduzida (PT):</span>
+                        Reunindo mais de 80 potências da América Latina e do Caribe, a CMI estabeleceu protocolos conjuntos para ajuda mútua em desastres naturais e programas de bolsas educacionais continentais.
+                    </div>
+
+                    <div id="orig-cmi" class="hidden bg-gray-100 border-2 border-gray-400 p-3 rounded-xl mb-4 text-xs text-gray-800 font-mono leading-relaxed">
+                        <span class="text-[10px] font-black text-gray-600 uppercase block mb-1">Original Source (Español):</span>
+                        "La Confederación Masónica Interamericana (CMI) ratificó acuerdos estratégicos entre las confederaciones para coordinar apoyo social y preservar el patrimonio documental de la orden."
+                    </div>
+
+                    <a href="artigo.html?id=mundo-cmi" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase mb-3">Ler matéria completa →</a>
+                </div>
+
+                <div class="pt-4 border-t-2 border-black/10 flex flex-wrap items-center justify-between gap-3">
+                    <button onclick="alternarIdioma('cmi')" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase">
+                        🔄 Alternar para Espanhol / Português
+                    </button>
+                    <a href="https://cmi1947.org" target="_blank" rel="noopener" class="text-xs font-extrabold text-purple-700 hover:underline">
+                        cmi1947.org ↗
+                    </a>
+                </div>
+            </article>
+
+            <!-- Notícia 3: Escócia -->
+            <article data-categoria="europa" data-artigo="artigo.html?id=mundo-scot" class="card-neo bg-white rounded-3xl p-6 flex flex-col justify-between cursor-pointer" role="link" tabindex="0" aria-label="Abrir matéria completa da Escócia">
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-[#ff1744] text-white font-black text-xs px-3 py-1 rounded border-2 border-black uppercase flex items-center gap-1">
+                            Escócia 🏴󠁧󠁢󠁳󠁣󠁴󠁿
+                        </span>
+                        <span class="text-xs font-bold text-gray-500">19 Set 2026</span>
+                    </div>
+
+                    <h3 class="font-comic text-2xl text-gray-900 uppercase mb-2 leading-tight">
+                        Grande Loja da Escócia Celebra Preservação de Templos Bicentenários
+                    </h3>
+
+                    <div id="trans-scot" class="bg-red-50 border-2 border-red-200 p-3 rounded-xl mb-4 text-xs text-gray-800 font-semibold leading-relaxed">
+                        <span class="text-[10px] font-black text-red-700 uppercase block mb-1">Versão Traduzida (PT):</span>
+                        Obras de manutenção estrutural em Edimburgo uniram técnicas artesanais de cantaria em pedra com certificações modernas de sustentabilidade.
+                    </div>
+
+                    <div id="orig-scot" class="hidden bg-gray-100 border-2 border-gray-400 p-3 rounded-xl mb-4 text-xs text-gray-800 font-mono leading-relaxed">
+                        <span class="text-[10px] font-black text-gray-600 uppercase block mb-1">Original Source (English):</span>
+                        "The Grand Lodge of Scotland highlights heritage masonry conservation across centuries-old premises with sustainable architectural practices."
+                    </div>
+
+                    <a href="artigo.html?id=mundo-scot" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase mb-3">Ler matéria completa →</a>
+                </div>
+
+                <div class="pt-4 border-t-2 border-black/10 flex flex-wrap items-center justify-between gap-3">
+                    <button onclick="alternarIdioma('scot')" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase">
+                        🔄 Alternar para Inglês / Português
+                    </button>
+                    <a href="https://grandlodgeofscotland.com" target="_blank" rel="noopener" class="text-xs font-extrabold text-red-700 hover:underline">
+                        grandlodgeofscotland.com ↗
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+    </main>
+
+    <!-- Rodapé Limpo -->
+    <footer class="bg-black text-white pt-6 pb-8 border-t-8 border-yellow-400 relative">
+        <div class="checkerboard h-3 w-full absolute top-0 left-0"></div>
+        <div class="max-w-7xl mx-auto px-4 mt-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+            <div>
+                <span class="font-comic text-xl text-yellow-400">INFO<span class="text-white">MAÇONARIA</span></span>
+                <p class="text-[11px] text-gray-400 mt-1">Traduções e monitorização das principais obediências regulares globais.</p>
+            </div>
+            <div class="text-xs text-gray-500 font-bold">
+                © 2026 InfoMaçonaria. Todos os direitos reservados.
+                <div class="flex flex-wrap justify-center sm:justify-end gap-3 mt-2 font-bold">
+                    <a href="privacidade.html" class="text-gray-400 hover:text-yellow-400 hover:underline">Privacidade</a>
+                    <a href="termos.html" class="text-gray-400 hover:text-yellow-400 hover:underline">Termos de Uso</a>
+                    <a href="cookies.html" class="text-gray-400 hover:text-yellow-400 hover:underline">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lógica de Filtros e Alternância de Idioma -->
+    <script>
+        document.querySelectorAll('[data-filter-arrow]').forEach(botao => {
+            const filtros = document.getElementById(botao.dataset.filterArrow);
+            const distancia = Number(botao.dataset.direction) * 180;
+            let intervalo;
+            const mover = () => { filtros.scrollLeft += distancia; };
+            const iniciar = evento => {
+                if (evento.cancelable) evento.preventDefault();
+                mover();
+                intervalo = window.setInterval(mover, 90);
+            };
+            const parar = () => { window.clearInterval(intervalo); intervalo = null; };
+            botao.addEventListener('pointerdown', iniciar);
+            botao.addEventListener('pointerup', parar);
+            botao.addEventListener('pointerleave', parar);
+            botao.addEventListener('pointercancel', parar);
+            botao.addEventListener('keydown', evento => {
+                if (evento.key === 'Enter' || evento.key === ' ') iniciar(evento);
+            });
+            botao.addEventListener('keyup', parar);
+        });
+
+        document.querySelectorAll('.marquee-wrapper').forEach(ticker => {
+            const pausarTicker = () => ticker.classList.add('is-pressing');
+            const retomarTicker = () => ticker.classList.remove('is-pressing');
+            ticker.addEventListener('pointerdown', pausarTicker);
+            ticker.addEventListener('pointerup', retomarTicker);
+            ticker.addEventListener('pointercancel', retomarTicker);
+            ticker.addEventListener('pointerleave', retomarTicker);
+        });
+
+        document.querySelectorAll('[data-artigo]').forEach(caixa => {
+            const abrirArtigo = () => { window.location.href = caixa.dataset.artigo; };
+            caixa.addEventListener('click', evento => {
+                if (!evento.target.closest('a, button')) abrirArtigo();
+            });
+            caixa.addEventListener('keydown', evento => {
+                if ((evento.key === 'Enter' || evento.key === ' ') && !evento.target.closest('a, button')) {
+                    evento.preventDefault();
+                    abrirArtigo();
+                }
+            });
+        });
+
+        function filtrarMundo(categoria) {
+            const artigos = document.querySelectorAll('#grid-mundo article');
+            const botoes = document.querySelectorAll('.filter-chip');
+
+            botoes.forEach(b => b.classList.remove('active'));
+            document.getElementById(`btn-mundo-${categoria}`).classList.add('active');
+
+            artigos.forEach(artigo => {
+                if (categoria === 'todos' || artigo.dataset.categoria === categoria) {
+                    artigo.style.display = 'flex';
+                } else {
+                    artigo.style.display = 'none';
+                }
+            });
+        }
+
+        function alternarIdioma(id) {
+            const trans = document.getElementById(`trans-${id}`);
+            const orig = document.getElementById(`orig-${id}`);
+            if (trans.classList.contains('hidden')) {
+                trans.classList.remove('hidden');
+                orig.classList.add('hidden');
+            } else {
+                trans.classList.add('hidden');
+                orig.classList.remove('hidden');
+            }
+        }
+    </script>
+
+</body>
+</html>
