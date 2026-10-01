@@ -3,644 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoMaçonaria | Portal de Notícias</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,800;0,900;1,900&family=Space+Grotesk:wght@600;700;800&display=swap');
-
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #0b021a;
-            background-image: radial-gradient(#1c093a 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
-            min-height: 100vh;
-            color: #000;
-            overflow-x: hidden;
-        }
-
-        .font-comic {
-            font-family: 'Montserrat', sans-serif;
-            font-style: italic;
-            font-weight: 900;
-        }
-
-        /* Tipografia do Logótipo Oficial */
-        .logo-info {
-            color: #ffea00;
-            -webkit-text-stroke: 2px #000;
-            text-shadow: 4px 4px 0px #000;
-        }
-
-        .logo-maconaria {
-            color: #ffffff;
-            -webkit-text-stroke: 2px #000;
-            text-shadow: 4px 4px 0px #000;
-        }
-
-        /* Título Destaque 3D Extrudado */
-        .text-headline-3d {
-            color: #ffffff;
-            -webkit-text-stroke: 2px #000;
-            text-shadow: 4px 4px 0px #000;
-        }
-
-        /* Cartões com Efeito Pop-Out 3D */
-        .card-neo {
-            border: 4px solid #000;
-            box-shadow: 7px 7px 0px #000;
-            position: relative;
-            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), 
-                        box-shadow 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-            will-change: transform, box-shadow;
-        }
-
-        /* Efeito de Salto ao passar o mouse */
-        .card-neo:hover {
-            transform: translate(-6px, -6px);
-            box-shadow: 14px 14px 0px #000;
-            z-index: 30;
-        }
-
-        /* Efeito tátil de clique */
-        .card-neo:active {
-            transform: translate(2px, 2px);
-            box-shadow: 3px 3px 0px #000;
-        }
-
-        .btn-neo {
-            border: 3px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            transition: all 0.15s ease-in-out;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .btn-neo:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0px #000;
-        }
-
-        .btn-neo:active {
-            transform: translate(2px, 2px);
-            box-shadow: 1px 1px 0px #000;
-        }
-
-        /* Animações dos Botões com Imagem PNG */
-        .btn-img-action {
-            display: inline-block;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.2s ease;
-        }
-
-        .btn-img-action:hover {
-            transform: scale(1.08) translateY(-2px);
-            filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 0.8));
-        }
-
-        .btn-img-action:active {
-            transform: scale(0.96) translateY(2px);
-        }
-        /* Elemento 3D Saltando da Caixa */
-        .pop-element {
-            position: absolute;
-            filter: drop-shadow(4px 4px 0px #000) drop-shadow(-1px -1px 0px rgba(255, 255, 255, 0.5));
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 20;
-            user-select: none;
-        }
-
-        .card-neo:hover .pop-element {
-            transform: scale(1.15) rotate(6deg) translateY(-4px);
-        }
-
-        /* Letreiro Marquee */
-        .marquee-wrapper {
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .marquee-track {
-            display: inline-block;
-            animation: marquee 25s linear infinite;
-        }
-        .marquee-wrapper.is-pressing .marquee-track {
-            animation-play-state: paused;
-            cursor: pointer;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* Área AdSense */
-        .adsense-placeholder {
-            background-color: #ffffff;
-            border: 2px dashed #94a3b8;
-            background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
-            background-size: 10px 10px;
-        }
-
-        /* Piso de Mosaico Xadrez */
-        .checkerboard {
-            background-image: 
-                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000),
-                linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
-            background-size: 16px 16px;
-            background-position: 0 0, 8px 8px;
-            background-color: #fff;
-        }
-
-        h1, h2, h3, h4 { overflow-wrap: anywhere; }
-        @media (max-width: 640px) {
-            .btn-neo, .filter-chip { min-height: 44px; }
-            main { padding-top: 1.25rem; }
-
-            header { padding: .5rem .75rem; }
-            header .max-w-7xl { gap: .5rem; }
-            header .max-w-7xl > a:first-child { width: 100%; justify-content: center; }
-            header .max-w-7xl > div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; gap: .4rem; }
-            header .max-w-7xl > div > .btn-neo { min-width: 0; min-height: 44px; padding: .45rem .2rem; font-size: .6rem; }
-            header .max-w-7xl > div > .btn-img-action { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 44px; padding: .15rem; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
-            header .max-w-7xl > div > .btn-img-action img { width: 100%; height: auto; max-height: 2.7rem; object-fit: contain; }
-            main.max-w-7xl { padding-left: .75rem; padding-right: .75rem; }
-            main > .grid { gap: 1rem; margin-bottom: 2rem; }
-            #brasil > .card-neo { padding: 1rem; border-radius: 1.25rem; }
-            #brasil .pop-element { display: none; }
-            #brasil h2 { font-size: 1.7rem; line-height: 1.08; }
-            #brasil .card-neo.bg-blue-900 { max-width: 9rem; }
-            #internacional > .card-neo { padding: 1rem; border-radius: 1.25rem; }
-            #internacional .card-neo h3 { font-size: 1.05rem; }
-            #loja, #parceiro, #doacoes { border-radius: 1.25rem; }
-        }
-
-        /* Estilos exclusivos do Destaque Parceiro */
-        .partner-options {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: .75rem;
-        }
-
-        .partner-option {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: .75rem;
-            min-width: 0;
-            padding: .9rem;
-            background: rgba(255, 255, 255, .78);
-            border: 3px solid #000;
-            border-radius: 1rem;
-            box-shadow: 4px 4px 0 #000;
-        }
-
-        .partner-option h4 {
-            margin: 0;
-            color: #111827;
-            font-size: .8rem;
-            line-height: 1.15;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        .partner-price {
-            display: block;
-            margin-top: .3rem;
-            color: #dc2626;
-            font-size: 1.15rem;
-            line-height: 1;
-            font-weight: 900;
-        }
-
-        .partner-description {
-            display: block;
-            color: #374151;
-            font-size: .7rem;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .partner-tag {
-            display: block;
-            margin-bottom: .55rem;
-            padding: .35rem .45rem;
-            color: #fff;
-            background: #0038ff;
-            border: 2px solid #000;
-            border-radius: .55rem;
-            font-size: .62rem;
-            line-height: 1.15;
-            font-weight: 900;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .partner-buy {
-            width: 100%;
-            padding: .65rem .5rem;
-            color: #fff;
-            background: #000;
-            border: 3px solid #000;
-            border-radius: .7rem;
-            font-size: .68rem;
-            line-height: 1;
-            font-weight: 900;
-            text-align: center;
-            text-transform: uppercase;
-            transition: background-color .15s ease, color .15s ease, transform .15s ease;
-        }
-
-        .partner-buy:hover {
-            color: #000;
-            background: #fff;
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 640px) {
-            .partner-options { grid-template-columns: 1fr; gap: 1rem; }
-            .partner-option { padding: 1rem; }
-            .partner-option h4 { font-size: .9rem; }
-            .partner-price { font-size: 1.3rem; }
-            .partner-description { font-size: .78rem; }
-            .partner-buy { min-height: 44px; font-size: .75rem; }
-        }
-    </style>
+    <title>GeraContrato - Gerador de Contratos Gratuito</title>
+    <!-- Conecta o arquivo de estilos que vamos preencher no passo 2 -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- 1. Barra Superior com Etiqueta URGENTE -->
-    <div class="bg-yellow-400 border-b-4 border-black py-2 px-3 flex items-center marquee-wrapper select-none font-bold text-xs md:text-sm">
-        <div class="bg-black text-white px-3.5 py-0.5 mx-2 border-2 border-white rounded transform -skew-x-12 z-20 shrink-0 font-black tracking-widest shadow-[2px_2px_0px_#000]">
-            URGENTE
+    <header>
+        <h1>GeraContrato</h1>
+        <p>Crie contratos profissionais de prestação de serviços com salvamento automático e sincronização na nuvem.</p>
+    </header>
+
+    <div class="wrapper">
+        <!-- PAINEL DE CONTROLE (ESQUERDA) -->
+        <div class="box-inputs">
+            <!-- Espaço reservado para os banners do Google AdSense gerarem renda -->
+            <div class="adsense-placeholder">Espaço do Anúncio (Google AdSense)</div>
+            
+            <div class="form-group">
+                <label for="contratante">Nome do Cliente (Contratante)</label>
+                <input type="text" id="contratante" placeholder="Ex: Rogério Marques" oninput="atualizarContrato(); capturarEProcessarDados();">
+            </div>
+            
+            <div class="form-group">
+                <label for="contrated">Seu Nome ou Empresa (Contratado)</label>
+                <input type="text" id="contrated" placeholder="Ex: DevTech Soluções" oninput="atualizarContrato(); capturarEProcessarDados();">
+            </div>
+            
+            <div class="form-group">
+                <label for="servico">Descrição do Serviço Técnico</label>
+                <textarea id="servico" rows="4" placeholder="Ex: Criação de um site institucional moderno..." oninput="atualizarContrato(); capturarEProcessarDados();"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="valor">Valor Total do Serviço (R$)</label>
+                <input type="text" id="valor" placeholder="Ex: 2.500,00" oninput="atualizarContrato(); capturarEProcessarDados();">
+            </div>
+
+            <!-- Botão que dispara a função do app.js para salvar no Supabase e abrir a impressão -->
+<button class="btn-print" onclick="enviarParaOSupabase()">Imprimir e Salvar PDF</button>
         </div>
-        <div class="marquee-track text-black font-extrabold tracking-wide flex items-center gap-6">
-            <span>🏛️ <strong class="text-red-700">Escócia:</strong> Loja histórica de Edimburgo revela documentos inéditos do século XVIII.</span>
-            <span>•</span>
-            <span>🚨 <strong class="text-red-700">GOB-SP:</strong> Assembleia Geral define novas metas filantrópicas para o próximo trimestre.</span>
-            <span>•</span>
-            <span>🌍 <strong class="text-blue-800">UGLE:</strong> Grande Loja Unida da Inglaterra expande acesso livre a investigadores mundiais.</span>
+
+        <!-- PAINEL DE PREVIEW (DIREITA) -->
+        <div class="box-preview">
+            <div class="contract-text" id="previewText">
+                <h3 style="text-align: center; margin-bottom: 25px; text-transform: uppercase; color: #1e293b;">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</h3>
+                <p>Pelo presente instrumento particular, de um lado denominado <strong>CONTRATANTE:</strong> <span id="lblContratante" style="color:#4f46e5; font-weight:bold;">[Nome do Cliente]</span>, e de outro lado denominado <strong>CONTRATADO:</strong> <span id="lblContratado" style="color:#4f46e5; font-weight:bold;">[Sua Empresa]</span>, firmam o presente acordo:</p>
+                <br>
+                <p><strong>Cláusula 1ª - Objeto:</strong> O CONTRATADO se compromete a realizar o seguinte serviço: <span id="lblServico" style="color:#1e293b;">[Descrição do serviço]</span>.</p>
+                <br>
+                <p><strong>Cláusula 2ª - Preço:</strong> Pelo trabalho executado, o CONTRATANTE pagará a quantia acordada de R$ <span id="lblValor" style="color:#1e293b;">0,00</span>.</p>
+                <br>
+                <p>As partes elegem o foro local para dirimir quaisquer dúvidas contratuais.</p>
+                <br><br>
+                <p style="text-align: center;">_______________________________________<br>Assinatura do Contratante</p>
+                <br><br>
+                <p style="text-align: center;">_______________________________________<br>Assinatura do Contratado</p>
+            </div>
         </div>
     </div>
 
-    <!-- 2. Cabeçalho Principal (Azul Royal) -->
-    <header class="bg-[#0038ff] border-b-4 border-black px-4 py-2.5 sticky top-0 z-50 shadow-2xl">
-        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
-            
-            <!-- Logótipo Oficial -->
-            <a href="index.html" class="flex items-center group">
-                <span class="font-comic text-3xl md:text-4xl lg:text-5xl tracking-tighter leading-none select-none transition-transform group-hover:scale-105">
-                    <span class="logo-info">INFO</span><span class="logo-maconaria">MAÇONARIA</span>
-                </span>
-            </a>
-
-            <!-- Navegação e Botões com as Imagens Reais -->
-            <div class="flex flex-wrap items-center gap-3">
-                
-                <!-- Botão Brasil -->
-                <a href="brasil.html" class="btn-neo bg-[#ff1744] text-white font-black px-4 py-2 rounded-xl text-sm uppercase tracking-wider hover:bg-black hover:text-white h-11">
-    BRASIL <img src="flag-brazil_1f1e7-1f1f7.png" alt="Brasil" class="h-4 w-4 object-contain ml-1 inline-block align-middle">
-</a>
-
-<a href="mundo.html" class="btn-neo bg-[#7928ca] text-white font-black px-4 py-2 rounded-xl text-sm uppercase tracking-wider hover:bg-yellow-400 hover:text-black flex items-center gap-1.5 h-11">
-    <span>MUNDO</span>
-    <span class="text-base leading-none">🌍</span>
-</a>
-
-                <!-- Botão Loja (Imagem Real loja-btn.png) -->
-                <a href="#loja" class="btn-img-action" title="Acessar Loja InfoMaçonaria">
-                    <img src="loja-btn.png" alt="Loja InfoMaçonaria" class="h-11 md:h-12 w-auto object-contain cursor-pointer drop-shadow-[2px_2px_0px_#000]">
-                </a>
-
-                <!-- Botão Doações (Imagem Real doacao-btn.png) -->
-                <a href="#doacoes" class="btn-img-action" title="Faça sua Doação">
-                    <img src="doacao-btn.png" alt="Faça sua Doação" class="h-11 md:h-12 w-auto object-contain cursor-pointer drop-shadow-[2px_2px_0px_#000]">
-                </a>
-
-            </div>
-
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto px-4 py-6">
-
-        <!-- 3. Banner Chamada Para Doações com o Ícone Oficial -->
-        <section class="card-neo bg-yellow-400 rounded-3xl p-4 md:p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <img src="doacao-btn.png" alt="Coração Doação" class="h-16 md:h-20 w-auto object-contain drop-shadow-[3px_3px_0px_#000] shrink-0">
-                <div>
-                    <h2 class="font-comic text-2xl md:text-3xl lg:text-4xl text-white text-headline-3d uppercase leading-none">
-                        FAÇA SUA DOAÇÃO
-                    </h2>
-                    <p class="text-xs md:text-sm font-extrabold text-black mt-1">
-                        Ajude a sustentar os servidores do portal independente de notícias.
-                    </p>
-                </div>
-            </div>
-            <a href="#doacoes" class="btn-neo bg-black text-white font-black px-6 py-3 rounded-2xl text-xs md:text-sm uppercase tracking-wider hover:bg-white hover:text-black shrink-0">
-                Apoiar Agora ➔
-            </a>
-        </section>
-
-        <!-- 4. Espaço Publicitário Google AdSense (728x90) -->
-        <div class="card-neo bg-white rounded-2xl p-3 mb-8">
-            <div class="flex justify-between items-center text-[10px] uppercase font-bold text-gray-400 mb-1 px-1">
-                <span>Espaço Publicitário</span>
-                <span>Google AdSense • 728x90</span>
-            </div>
-            <div class="adsense-placeholder w-full h-24 md:h-28 rounded-xl flex flex-col items-center justify-center text-center p-2">
-                <span class="font-black text-gray-500 text-xs md:text-sm uppercase tracking-wide">Anúncio Responsivo (Topo)</span>
-                <span class="text-[11px] text-gray-400 font-mono mt-0.5">Insira aqui a tag &lt;ins class="adsbygoogle"&gt;&lt;/ins&gt;</span>
-            </div>
-        </div>
-
-        <!-- 5. Seção de Notícias: Destaque Nacional + Coluna Internacional -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-            
-            <!-- Notícia Nacional Principal -->
-            <section id="brasil" class="lg:col-span-2">
-                <div class="card-neo bg-yellow-400 rounded-3xl p-6 md:p-8 h-full flex flex-col justify-between relative cursor-pointer" data-artigo="artigo.html?id=destaque" role="link" tabindex="0" aria-label="Abrir matéria completa sobre o acordo cívico">
-                    
-                    <div class="pop-element -top-6 -right-2 text-6xl rotate-12">📐</div>
-
-                    <div>
-                        <div class="flex flex-wrap items-center gap-2 mb-4">
-                            <span class="bg-black text-white font-black px-3 py-1 text-xs uppercase rounded-lg border-2 border-white flex items-center gap-1.5">
-                                DESTAQUE NACIONAL <span class="text-yellow-400">👑</span>
-                            </span>
-                            <span class="bg-[#ff1744] text-white font-black px-3 py-1 text-xs rounded-lg border-2 border-black">
-                                GOB - CMSB - COMAB
-                            </span>
-                        </div>
-
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center my-4">
-                            
-                            <div class="md:col-span-2">
-                                <h2 class="font-comic text-2xl md:text-3xl lg:text-4xl text-white text-headline-3d uppercase leading-tight mb-3">
-                                    Potências Regulares Firmam Acordo Cívico Para Ações Comunitárias
-                                </h2>
-                                <p class="text-xs md:text-sm font-bold text-gray-900 leading-relaxed bg-white/60 p-3 rounded-xl border-l-4 border-red-600">
-                                    Iniciativa reforça o papel da Maçonaria na sociedade brasileira e amplia o alcance de projetos sociais e de reforço escolar.
-                                </p>
-                            </div>
-
-                            <div class="md:col-span-1 flex justify-center">
-                                <div class="card-neo bg-blue-900 rounded-2xl p-2 w-full max-w-[200px] aspect-square flex items-center justify-center relative overflow-hidden">
-                                    <div class="w-full h-full border-2 border-yellow-400 rounded-xl bg-gradient-to-br from-blue-950 via-blue-900 to-indigo-950 flex flex-col items-center justify-center text-center p-2 shadow-inner">
-                                        <div class="text-4xl md:text-5xl text-yellow-400 filter drop-shadow-[2px_2px_0px_#000]">
-                                            📐
-                                        </div>
-                                        <span class="font-black text-yellow-300 text-lg tracking-widest mt-1">G</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t-2 border-black/20 text-xs font-black text-black">
-                        <div class="flex items-center gap-4">
-                            <span>📅 24 de agosto de 2025</span>
-                        </div>
-                        <a href="artigo.html?id=destaque" class="btn-neo bg-black text-white px-4 py-2 rounded-xl text-xs uppercase hover:bg-[#ff1744]">
-                            Ler Matéria Completa →
-                        </a>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- Coluna de Notícias Internacionais -->
-            <section id="internacional" class="flex flex-col gap-6">
-                
-                <!-- Notícia UGLE (Londres) -->
-                <div class="card-neo bg-[#0038ff] text-white rounded-3xl p-5 relative cursor-pointer" data-artigo="artigo.html?id=mundo-ugle" role="link" tabindex="0" aria-label="Abrir matéria completa sobre o Museu Maçónico de Londres">
-                    <div class="absolute -top-4 right-4 text-4xl select-none filter drop-shadow-[2px_2px_0px_#000]">
-                        🏛️
-                    </div>
-
-                    <div class="mb-3">
-                        <span class="bg-black text-yellow-400 border border-white font-black text-[11px] px-2.5 py-1 rounded uppercase inline-flex items-center gap-1">
-                            UGLE - REINO UNIDO <span class="text-yellow-400">👑</span>
-                        </span>
-                    </div>
-
-                    <h3 class="font-comic text-base md:text-lg uppercase mb-2 leading-snug">
-                        Museu Maçónico de Londres Disponibiliza Registos de 1723
-                    </h3>
-
-                    <p class="text-[11px] text-blue-100 font-semibold mb-4 leading-relaxed bg-blue-950/50 p-2.5 rounded-xl border border-blue-400/30">
-                        <strong class="text-yellow-300">Em Português:</strong> Mais de 100 mil manuscritos fundacionais foram digitalizados com leitura integral para pesquisadores mundiais.
-                    </p>
-
-                    <a href="artigo.html?id=mundo-ugle" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase mb-3">Ler matéria completa →</a>
-
-                    <div class="flex items-center justify-between text-[11px] font-bold text-blue-200 border-t border-blue-400/30 pt-3">
-                        <span>📅 23 de agosto de 2025</span>
-                    </div>
-                </div>
-
-                <!-- Notícia Internacional 2 (Mundo) -->
-                <div class="card-neo bg-[#7928ca] text-white rounded-3xl p-5 relative cursor-pointer" data-artigo="artigo.html?id=mundo-legado" role="link" tabindex="0" aria-label="Abrir matéria completa sobre o legado internacional">
-                    <div class="mb-3">
-                        <span class="bg-black text-white border border-white font-black text-[11px] px-2.5 py-1 rounded uppercase inline-flex items-center gap-1">
-                            MUNDO <span>🌍</span>
-                        </span>
-                    </div>
-
-                    <h3 class="font-comic text-base md:text-lg uppercase mb-2 leading-snug">
-                        Fraternidade e União: O Legado Histórico Internacional
-                    </h3>
-
-                    <p class="text-[11px] text-purple-100 font-semibold mb-4 leading-relaxed bg-purple-950/50 p-2.5 rounded-xl border border-purple-400/30">
-                        Convenções europeias reforçam a partilha de fundos solidários transfronteiriços para assistência humanitária.
-                    </p>
-
-                    <a href="artigo.html?id=mundo-legado" class="btn-neo bg-yellow-400 text-black font-black text-xs px-3 py-2 rounded-xl uppercase mb-3">Ler matéria completa →</a>
-
-                    <div class="flex items-center justify-between text-[11px] font-bold text-purple-200 border-t border-purple-400/30 pt-3">
-                        <span>📅 20 de agosto de 2025</span>
-                    </div>
-                </div>
-
-            </section>
-        </div>
-
-        <!-- 6. Bloco Duplo: Loja Oficial & Produto Parceiro -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
-            
-            <!-- Loja InfoMaçonaria (Ocupa 2 Colunas) -->
-            <!-- Loja InfoMaçonaria (Ocupa 2 Colunas) -->
-            <!-- 1. Adicionado 'relative' no final -->
-            <section id="loja" class="lg:col-span-2 card-neo bg-white rounded-3xl p-6 flex flex-col justify-between relative">
-                
-                <!-- 2. Imagem movida para cá com as classes 'absolute' e 'pop-element' -->
-                <img src="loja-btn.png" alt="Loja InfoMaçonaria" class="absolute -top-6 -left-6 md:-top-8 md:-left-8 w-24 md:w-32 z-20 pop-element object-contain -rotate-6">
-
-                <!-- 3. Título da Loja (Adicionado pl-20 e md:pl-28) -->
-                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b-4 border-black pb-4 pl-20 md:pl-28">
-                    <div>
-                        <span class="bg-[#7928ca] text-white font-black px-2.5 py-0.5 text-[10px] rounded uppercase">Espaço Oficial</span>
-                        <h3 class="font-comic text-xl uppercase text-gray-900 mt-1">Loja InfoMaçonaria</h3>
-                    </div>
-                </div>
-
-                <!-- Produtos (Ajustados para caberem nas 3 colunas) -->
-                <!-- AQUI ESTÁ A PRIMEIRA MUDANÇA: sm:grid-cols-3 -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 h-full">
-                    
-                    <div class="card-neo bg-yellow-100 rounded-2xl p-4 flex flex-col justify-between">
-                        <div class="h-20 bg-yellow-300 rounded-xl border-2 border-black flex items-center justify-center text-3xl mb-2">📚</div>
-                        <h4 class="font-black text-xs text-gray-900 leading-tight">Livro Histórico Anotado</h4>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-sm font-black text-red-600">R$ 79,90</span>
-                            <button class="btn-neo bg-black text-white px-3 py-1.5 rounded-lg text-xs font-black hover:bg-yellow-400 hover:text-black">Comprar</button>
-                        </div>
-                    </div>
-                    
-                    <div class="card-neo bg-purple-50 rounded-2xl p-4 flex flex-col justify-between">
-                        <div class="h-20 bg-purple-200 rounded-xl border-2 border-black flex items-center justify-center text-3xl mb-2">☕</div>
-                        <h4 class="font-black text-xs text-gray-900 leading-tight">Caneca Pavimento Mosaico</h4>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-sm font-black text-purple-700">R$ 44,90</span>
-                            <button class="btn-neo bg-purple-600 text-white px-3 py-1.5 rounded-lg text-xs font-black hover:bg-black">Comprar</button>
-                        </div>
-                    </div>
-
-                    <!-- AQUI ESTÁ A SEGUNDA MUDANÇA: CÓDIGO DA BLUSA -->
-                    <div class="card-neo bg-blue-50 rounded-2xl p-4 flex flex-col justify-between">
-                        <div class="h-20 bg-blue-200 rounded-xl border-2 border-black flex items-center justify-center text-3xl mb-2">👕</div>
-                        <h4 class="font-black text-xs text-gray-900 leading-tight">Camiseta Esquadro & Compasso</h4>
-                        <div class="flex justify-between items-center mt-3">
-                            <span class="text-sm font-black text-blue-700">R$ 89,90</span>
-                            <button class="btn-neo bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-black hover:bg-black">Comprar</button>
-                        </div>
-                    </div>
-                    
-                </div>
-            </section>
-
-            <!-- INÍCIO DESTAQUE PARCEIRO -->
-            <section id="parceiro" class="card-neo bg-yellow-400 rounded-3xl p-6 flex flex-col justify-between relative group">
-                <div class="pop-element -top-6 -right-2 text-6xl rotate-6">🎁</div>
-
-                <div class="relative z-10">
-                    <span class="bg-black text-white font-black text-[10px] px-2.5 py-1 rounded uppercase">
-                        Destaque Parceiro
-                    </span>
-                    <h3 class="font-comic text-2xl uppercase text-black leading-tight mt-3 mb-2">
-                        Coletânea Jovem Aprendiz (Portuguese Edition)
-                    </h3>
-                    <p class="text-[11px] font-bold text-gray-800 bg-white/70 p-2.5 rounded-xl border border-black/20 mb-4">
-                        Conheça a obra e escolha a versão ideal para você.
-                    </p>
-
-                    <div class="partner-options">
-                        <article class="partner-option">
-                            <div>
-                                <h4>Kindle</h4>
-                                <span class="partner-price">R$ 9,99</span>
-                                <span class="partner-description">Formato digital.</span>
-                            </div>
-                            <a href="https://amzn.to/3TtLWUl" target="_blank" rel="noopener sponsored" class="partner-buy">Comprar →</a>
-                        </article>
-
-                        <article class="partner-option">
-                            <div>
-                                <span class="partner-tag">🌎 Compra internacional</span>
-                                <h4>Capa comum</h4>
-                                <span class="partner-price">R$ 49,64</span>
-                                <span class="partner-description">Livro físico.</span>
-                            </div>
-                            <a href="https://amzn.to/3TtLWUl" target="_blank" rel="noopener sponsored" class="partner-buy">Comprar →</a>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="relative z-10 pt-4 mt-5 border-t-2 border-black/20 text-center">
-                    <span class="block text-[9px] font-extrabold text-black/60 uppercase">Compra realizada pelo link apoia o portal.</span>
-                </div>
-            </section>
-            <!-- FIM DESTAQUE PARCEIRO -->
-
-        </div>
-
-        <!-- 7. Seção de Doações PIX Direta -->
-        <section id="doacoes" class="card-neo bg-yellow-400 rounded-3xl p-6 md:p-8 mb-12">
-            <div class="max-w-2xl">
-                <span class="bg-black text-white font-black text-xs px-3 py-1 rounded-full uppercase">
-                    Apoio Independente 💛
-                </span>
-                <h3 class="font-comic text-2xl md:text-3xl uppercase text-black mt-2 mb-2">
-                    Faça sua Doação com Chave PIX
-                </h3>
-                <p class="font-bold text-xs md:text-sm text-gray-900 mb-4 leading-relaxed">
-                    Copie a nossa chave PIX e contribua com qualquer quantia para manter as traduções e o sistema operacionais.
-                </p>
-                <div class="bg-white border-3 border-black rounded-xl p-3 flex flex-col sm:flex-row items-center justify-between gap-3">
-                    <span class="text-[10px] font-black uppercase text-gray-500">CNPJ</span>
-                    <code id="pixKey" class="font-mono font-black text-sm text-blue-700 select-all">
-                        67.876.295/0001-35
-                    </code>
-                    <button onclick="copiarPix()" class="btn-neo bg-black text-white font-black px-4 py-2 rounded-lg text-xs uppercase hover:bg-yellow-400 hover:text-black shrink-0">
-                        📋 Copiar Chave PIX
-                    </button>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- 8. Rodapé -->
-    <footer class="bg-black text-white pt-6 pb-8 border-t-8 border-yellow-400 relative">
-        <div class="checkerboard h-3 w-full absolute top-0 left-0"></div>
-        <div class="max-w-7xl mx-auto px-4 mt-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-            <div>
-                <span class="font-comic text-xl text-yellow-400">INFO<span class="text-white">MAÇONARIA</span></span>
-                <p class="text-[11px] text-gray-400 mt-1">
-                    Portal independente de notícias e documentação histórica.
-                </p>
-            </div>
-            <div class="text-xs text-gray-500 font-bold">
-                © 2026 InfoMaçonaria. Todos os direitos reservados.
-                <div class="flex flex-wrap justify-center sm:justify-end gap-3 mt-2 font-bold">
-                    <a href="privacidade.html" class="text-gray-400 hover:text-yellow-400 hover:underline">Privacidade</a>
-                    <a href="termos.html" class="text-gray-400 hover:text-yellow-400 hover:underline">Termos de Uso</a>
-                    <a href="cookies.html" class="text-gray-400 hover:text-yellow-400 hover:underline">Cookies</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
+    <!-- Script de atualização visual rápida -->
     <script>
-        document.querySelectorAll('.marquee-wrapper').forEach(ticker => {
-            const pausarTicker = () => ticker.classList.add('is-pressing');
-            const retomarTicker = () => ticker.classList.remove('is-pressing');
-            ticker.addEventListener('pointerdown', pausarTicker);
-            ticker.addEventListener('pointerup', retomarTicker);
-            ticker.addEventListener('pointercancel', retomarTicker);
-            ticker.addEventListener('pointerleave', retomarTicker);
-        });
-
-        function copiarPix() {
-            const pix = document.getElementById("pixKey").innerText.trim();
-            navigator.clipboard.writeText(pix).then(() => {
-                alert("Chave PIX copiada com sucesso! Obrigado pelo apoio.");
-            }).catch(() => {
-                prompt("Copie a chave PIX manualmente:", pix);
-            });
+        function atualizarContrato() {
+            document.getElementById('lblContratante').innerText = document.getElementById('contratante').value || '[Nome do Cliente]';
+            document.getElementById('lblContratado').innerText = document.getElementById('contrated').value || '[Sua Empresa]';
+            document.getElementById('lblServico').innerText = document.getElementById('servico').value || '[Descrição do serviço]';
+            document.getElementById('lblValor').innerText = document.getElementById('valor').value || '0,00';
         }
-
-        document.querySelectorAll('[data-artigo]').forEach(caixa => {
-            const abrirArtigo = () => { window.location.href = caixa.dataset.artigo; };
-            caixa.addEventListener('click', evento => {
-                if (!evento.target.closest('a, button')) abrirArtigo();
-            });
-            caixa.addEventListener('keydown', evento => {
-                if ((evento.key === 'Enter' || evento.key === ' ') && !evento.target.closest('a, button')) {
-                    evento.preventDefault();
-                    abrirArtigo();
-                }
-            });
-        });
     </script>
+    
+    <!-- Conecta com o arquivo de inteligência app.js que configuramos com as chaves do Supabase -->
+    <script src="./app.js"></script>
+
+        <!-- RODAPÉ EXIGIDO PELO GOOGLE ADSENSE -->
+    <footer style="text-align: center; padding: 40px 20px; margin-top: 50px; border-top: 1px solid #334155; color: #64748b; font-size: 13px;">
+        <p>&copy; 2026 GeraContrato. Todos os direitos reservados.</p>
+        <p style="margin-top: 10px;">
+            <a href="privacidade.html" style="color: #38bdf8; text-decoration: none; margin: 0 10px;">Política de Privacidade</a> | 
+            <a href="termos.html" style="color: #818cf8; text-decoration: none; margin: 0 10px;">Termos de Uso</a>
+        </p>
+    </footer>
 
 </body>
 </html>
